@@ -1,0 +1,75 @@
+//In this game, player will start playing first
+
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include "Player.h"
+#include "Human.h"
+#include "Computer.h"
+#include "Referee.h"
+
+using namespace std;
+
+int main(){
+	
+	/* Stage 0-1
+	//Create player object
+	Player*p1 = new Player("");
+	p1->performMove();
+	cout<<p1->getmove();			//This would return scissors if you enter scissors under setmove
+	
+	Human*h1 = new Human("","JR");
+	h1->performMove();
+	cout<<h1->getmove();
+	*/
+	
+	////////////////
+	//test stage 2-3
+	////////////////
+		
+	Computer*c1 = new Computer("","comp1","");
+	//c1->performMove();
+	//cout<<c1->getmove();
+
+	Referee*r1 = new Referee();
+	
+	Human*h1 = new Human("","JR");
+	srand(time(0));	
+	
+
+	while(true){
+		
+		cout<<"Type quit if you wish to exit loop. You may key in anything else to continue."<<endl;
+		string quit;
+		cin>>quit;
+		if(quit == "quit") break;
+
+		
+		h1->performMove();
+			r1->announcevalidmove(h1->getmove());
+			cout<<""<<endl;
+			
+		c1->storeplayermove(h1->getmove());    //computer remember player move	
+		
+		//c1->randmove();
+		//c1->feedbackmove_one();	//computer makes a moke based on player's second most recent move (to simulate concurrent moves)
+		//c1->feedbackmove_two();
+		c1->feedbackmove_three();		
+		cout<<"Computer's move is: '"<<c1->getmove()<<endl;		
+		
+		c1->storecompmove();	//computer store its own move
+		//r1->announcevalidmove(c1->getmove());
+		
+		r1->announcewinner(h1->getmove(),c1->getmove());
+		
+		cout<<""<<endl;
+		c1->display_playerhist();
+		cout<<""<<endl;
+    }
+	
+}//For main function
+
+
+
